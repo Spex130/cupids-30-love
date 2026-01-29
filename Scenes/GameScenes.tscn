@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://rs0xlakgagor"]
+
+[ext_resource type="Script" uid="uid://4d1ndkoq752g" path="res://Scripts/PlayerChar.gd" id="1_qhrot"]
+[ext_resource type="Material" uid="uid://brefw71jh6es1" path="res://VFX/Materials/Player.tres" id="2_k33oe"]
+[ext_resource type="Script" uid="uid://crjy3ycrbokmb" path="res://Scripts/Arena.gd" id="3_fjgpx"]
+[ext_resource type="Material" uid="uid://cftdpttg51ukm" path="res://VFX/Materials/Ground.tres" id="3_vxjsr"]
+[ext_resource type="Script" uid="uid://c1to82w0p170a" path="res://Scripts/Ball.gd" id="5_j0hco"]
+[ext_resource type="Material" uid="uid://bpu4jrwdv4ayr" path="res://VFX/Materials/Ball.tres" id="6_fi85q"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4s1h0"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_qhrot"]
+material = ExtResource("2_k33oe")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4s1h0"]
+size = Vector3(60, 0.5, 60)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qhrot"]
+material = ExtResource("3_vxjsr")
+
+[sub_resource type="SphereMesh" id="SphereMesh_dhhj6"]
+material = ExtResource("6_fi85q")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_j0hco"]
+
+[node name="Node3D" type="Node3D" unique_id=290292971]
+
+[node name="Game Manager" type="Node3D" parent="." unique_id=1713758058]
+
+[node name="Camera3D" type="Camera3D" parent="Game Manager" unique_id=2025713363]
+transform = Transform3D(1, 0, 0, 0, 0.34202015, 0.9396926, 0, -0.9396926, 0.34202015, 0, 126.84735, 25.91952)
+projection = 1
+size = 65.0
+
+[node name="PlayerChar" type="CharacterBody3D" parent="." unique_id=250647867 node_paths=PackedStringArray("ParentArena")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0.164, 0)
+script = ExtResource("1_qhrot")
+ParentArena = NodePath("../Arena")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerChar" unique_id=2093791450]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_4s1h0")
+disabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerChar" unique_id=1180557118]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_qhrot")
+
+[node name="Arena" type="StaticBody3D" parent="." unique_id=830446260 node_paths=PackedStringArray("CollisionShape", "MeshInstance")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
+script = ExtResource("3_fjgpx")
+CollisionShape = NodePath("CollisionShape3D")
+MeshInstance = NodePath("MeshInstance3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena" unique_id=1171091240]
+shape = SubResource("BoxShape3D_4s1h0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Arena" unique_id=1069398143]
+transform = Transform3D(60, 0, 0, 0, 0.5, 0, 0, 0, 60, 0, 0, 0)
+mesh = SubResource("BoxMesh_qhrot")
+
+[node name="Ball" type="Node3D" parent="." unique_id=1340674837 node_paths=PackedStringArray("BallMesh", "BallCollider", "ParentArena")]
+script = ExtResource("5_j0hco")
+BallMesh = NodePath("MeshInstance3D")
+BallCollider = NodePath("RigidBody3D/CollisionShape3D")
+Size = 2.0
+ParentArena = NodePath("../Arena")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ball" unique_id=300736852]
+mesh = SubResource("SphereMesh_dhhj6")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Ball" unique_id=1534493810]
+gravity_scale = 0.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ball/RigidBody3D" unique_id=1563754643]
+shape = SubResource("SphereShape3D_j0hco")
