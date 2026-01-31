@@ -1,4 +1,4 @@
-class_name Ball extends PhysicsBody3D
+class_name Ball extends RigidBody3D
 
 @export var BallMesh : MeshInstance3D
 @export var BallCollider : CollisionShape3D
@@ -13,6 +13,11 @@ func _ready() -> void:
 
 func _physics_process(delta):
 	var collision_info = move_and_collide(Direction * Speed * delta)
+	if(collision_info != null):
+		var normal = collision_info.get_normal()
+		if(Vector3.BACK.dot(normal) > 0.1 || Vector3.FORWARD.dot(normal) > 0.1):
+			FlipDirectionZ()
+
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -22,19 +27,25 @@ func _process(delta: float) -> void:
 	#BallCollider.scale = Vector3(Size, Size, Size)
 	WallCheck()
 	pass
-
+	
+func FlipDirectionX() -> void:
+	Direction.x *= -1
+	pass
+func FlipDirectionZ() -> void:
+	Direction.z *= -1
+	pass
 func WallCheck() -> void:
 	var CalcSize = Size/2
 	if position.x + CalcSize > ParentArena.RightWall:
-		Direction.x *= -1
+		FlipDirectionX()
 		position.x = ParentArena.RightWall - CalcSize
 	if position.x - CalcSize < ParentArena.LeftWall:
-		Direction.x *= -1
+		FlipDirectionX()
 		position.x = ParentArena.LeftWall + CalcSize
 	if position.z - CalcSize < ParentArena.TopWall:
-		Direction.z *= -1
+		FlipDirectionZ()
 		position.z = ParentArena.TopWall + CalcSize
 	if position.z + CalcSize > ParentArena.BottomWall:
-		Direction.z *= -1
+		FlipDirectionZ()
 		position.z = ParentArena.BottomWall - CalcSize
 	pass
