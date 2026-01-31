@@ -19,10 +19,16 @@ size = Vector3(60, 0.5, 60)
 [sub_resource type="BoxMesh" id="BoxMesh_qhrot"]
 material = ExtResource("3_vxjsr")
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_fi85q"]
+
 [sub_resource type="SphereMesh" id="SphereMesh_dhhj6"]
 material = ExtResource("6_fi85q")
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_j0hco"]
+[sub_resource type="BoxMesh" id="BoxMesh_fi85q"]
+size = Vector3(8, 4, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dhhj6"]
+size = Vector3(8, 4, 4)
 
 [node name="Node3D" type="Node3D" unique_id=290292971]
 
@@ -262,21 +268,33 @@ shape = SubResource("BoxShape3D_4s1h0")
 transform = Transform3D(60, 0, 0, 0, 0.5, 0, 0, 0, 60, 0, 0, 0)
 mesh = SubResource("BoxMesh_qhrot")
 
-[node name="Ball" type="Node3D" parent="." unique_id=1340674837 node_paths=PackedStringArray("BallMesh", "BallCollider", "ParentArena")]
+[node name="Ball" type="RigidBody3D" parent="." unique_id=1832644360 node_paths=PackedStringArray("BallMesh", "BallCollider", "ParentArena")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("5_j0hco")
 BallMesh = NodePath("MeshInstance3D")
-BallCollider = NodePath("RigidBody3D/CollisionShape3D")
-Size = 2.0
+BallCollider = NodePath("CollisionShape3D")
+Direction = Vector3(0, 0, -1)
+Speed = 15.0
 ParentArena = NodePath("../Arena")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ball" unique_id=324658035]
+shape = SubResource("SphereShape3D_fi85q")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ball" unique_id=300736852]
 mesh = SubResource("SphereMesh_dhhj6")
+skeleton = NodePath("")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="Ball" unique_id=1534493810]
-gravity_scale = 0.0
+[node name="Block" type="Node3D" parent="." unique_id=568595033]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -21.156385)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ball/RigidBody3D" unique_id=1563754643]
-shape = SubResource("SphereShape3D_j0hco")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Block" unique_id=1290354095]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("BoxMesh_fi85q")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Block/MeshInstance3D" unique_id=1596034595]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Block/MeshInstance3D/StaticBody3D" unique_id=1894308988]
+shape = SubResource("BoxShape3D_dhhj6")
 
 [connection signal="animation_finished" from="PlayerChar/Cupid/AnimationPlayer" to="PlayerChar" method="_on_animation_player_animation_finished"]
 

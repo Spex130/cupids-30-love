@@ -1,9 +1,9 @@
-class_name Ball extends Node3D
+class_name Ball extends PhysicsBody3D
 
 @export var BallMesh : MeshInstance3D
 @export var BallCollider : CollisionShape3D
 @export var Direction : Vector3 = Vector3(1, 0, -1)
-@export var Speed : float = .25
+@export var Speed : float = 1
 @export var Size : float = 1
 @export var ParentArena : Arena
 
@@ -11,12 +11,15 @@ class_name Ball extends Node3D
 func _ready() -> void:
 	pass # Replace with function body.
 
+func _physics_process(delta):
+	var collision_info = move_and_collide(Direction * Speed * delta)
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	position += Direction * Speed
+	#position += Direction * Speed
 	BallMesh.scale = Vector3(Size, Size, Size)
-	BallCollider.scale = Vector3(Size, Size, Size)
+	#BallCollider.scale = Vector3(Size, Size, Size)
 	WallCheck()
 	pass
 
