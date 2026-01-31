@@ -1,7 +1,21 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://brefw71jh6es1"]
 
+[ext_resource type="Shader" uid="uid://cushh0c2c31t0" path="res://VFX/Shaders/OutlineShader.gdshader" id="1_lqd3a"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lqd3a"]
+render_priority = 0
+shader = ExtResource("1_lqd3a")
+shader_parameter/scale = 2.0
+shader_parameter/outline_spread = 2.0
+shader_parameter/_Color = Color(0, 1, 0, 1)
+shader_parameter/_DepthNormalThreshold = 0.1
+shader_parameter/_DepthNormalThresholdScale = 3.0
+shader_parameter/_DepthThreshold = 0.03
+shader_parameter/_NormalThreshold = 2.0
+
 [resource]
+next_pass = SubResource("ShaderMaterial_lqd3a")
 albedo_color = Color(1, 0.17117018, 0.3007897, 1)
 emission_enabled = true
 emission = Color(1, 0.17254902, 0.3019608, 1)
-emission_energy_multiplier = 16.0
+emission_energy_multiplier = 0.0
