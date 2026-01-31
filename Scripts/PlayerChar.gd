@@ -6,9 +6,11 @@ class_name PlayerChar extends Node3D
 @export var StopSpeed = .2
 @export var MaxWalkSpeed : float = 1
 @export var IsMovingLeft : bool = false
+@export var PlayerAnimator : AnimationPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	PlayerAnimator.play("CupidIdle")
 	pass # Replace with function body.
 
 

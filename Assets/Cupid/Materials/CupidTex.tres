@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://b6qvdi8vrwltc"]
+
+[ext_resource type="Texture2D" uid="uid://cchqinnnpygg7" path="res://Assets/Cupid/CupidTex.png" id="1_d7cgv"]
+
+[resource]
+resource_name = "CupidTex"
+transparency = 4
+cull_mode = 2
+albedo_texture = ExtResource("1_d7cgv")
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_operator = 1
+emission_texture = ExtResource("1_d7cgv")

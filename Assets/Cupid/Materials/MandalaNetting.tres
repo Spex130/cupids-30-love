@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://djfiacfdqplp6"]
+
+[ext_resource type="Texture2D" uid="uid://c26ms6qqiy5ej" path="res://Assets/Cupid/Mandala-1.png" id="1_i5fhd"]
+[ext_resource type="Texture2D" uid="uid://mmycn6xll5ds" path="res://Assets/Cupid/Mandala.png" id="2_huspq"]
+
+[resource]
+resource_name = "MandalaNetting"
+transparency = 4
+cull_mode = 2
+albedo_texture = ExtResource("1_i5fhd")
+roughness = 0.5
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_operator = 1
+emission_texture = ExtResource("2_huspq")

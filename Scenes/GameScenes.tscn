@@ -33,10 +33,11 @@ transform = Transform3D(1, 0, 0, 0, 0.34202015, 0.9396926, 0, -0.9396926, 0.3420
 projection = 1
 size = 65.0
 
-[node name="PlayerChar" type="CharacterBody3D" parent="." unique_id=250647867 node_paths=PackedStringArray("ParentArena")]
+[node name="PlayerChar" type="CharacterBody3D" parent="." unique_id=250647867 node_paths=PackedStringArray("ParentArena", "PlayerAnimator")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0.164, 0)
 script = ExtResource("1_qhrot")
 ParentArena = NodePath("../Arena")
+PlayerAnimator = NodePath("Cupid/AnimationPlayer")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerChar" unique_id=2093791450]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -48,15 +49,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 visible = false
 mesh = SubResource("CapsuleMesh_qhrot")
 
-[node name="Cupid" parent="PlayerChar" unique_id=421187690 instance=ExtResource("3_fi85q")]
+[node name="Cupid" parent="PlayerChar" unique_id=924624951 instance=ExtResource("3_fi85q")]
 transform = Transform3D(-0.5, 0, -4.371139e-08, 0, 0.5, 0, 4.371139e-08, 0, -0.5, 0, 0, 0)
 
-[node name="Skeleton3D" parent="PlayerChar/Cupid/metarig" parent_id_path=PackedInt32Array(421187690, 340597896) index="0" unique_id=1468223345]
+[node name="Skeleton3D" parent="PlayerChar/Cupid/metarig" parent_id_path=PackedInt32Array(924624951, 528931174) index="0" unique_id=1860117845]
 bones/23/rotation = Quaternion(0.91121566, 1.010763e-07, 2.1960417e-07, -0.41192973)
 bones/27/rotation = Quaternion(-1.0209387e-07, 0.9336862, -0.3580924, -1.8179541e-07)
 bones/28/rotation = Quaternion(0.91121566, -1.010763e-07, -2.1960415e-07, -0.41192973)
 
-[node name="Skeleton3D" parent="PlayerChar/Cupid/rig" parent_id_path=PackedInt32Array(421187690, 2028573555) index="0" unique_id=1824733648]
+[node name="Skeleton3D" parent="PlayerChar/Cupid/rig" parent_id_path=PackedInt32Array(924624951, 1363104429) index="0" unique_id=567802538]
 bones/1/position = Vector3(-0.45165682, 0.12664701, 1.3209003)
 bones/1/rotation = Quaternion(0.8067895, 0.41428345, 0.19242875, 0.37474167)
 bones/3/rotation = Quaternion(-0.07746391, 2.0069835e-07, -1.2196507e-07, 0.99699515)
