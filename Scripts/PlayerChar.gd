@@ -1,13 +1,26 @@
 class_name PlayerChar extends Node3D
 
 @export var ParentArena : Arena 
+@export var PointerCircle : MeshInstance3D
+@export var PlayerModel : Node3D
 @export var Velocity : float = 0
 @export var WalkSpeed : float = .085
 @export var StopSpeed = .4
 @export var SlowSpeed = .1
-@export var MaxWalkSpeed : float = 1
+@export var MaxWalkSpeed : float = 0.5
 @export var IsMovingLeft : bool = false
 @export var PlayerAnimator : AnimationPlayer 
+
+#Power Shot vars
+@export var shotAngle : float = 0
+var shotAngleMax = 75
+var shotAngleSpeed = 1
+var shotPowerMin = 1.5
+@export var shotPower = shotPowerMin
+var shotPowerMax = 3
+var shotPowerGrowth = .01
+@export var vectorDirection : Vector3 = Vector3.FORWARD
+
 
 # Prefab PackedScenes
 
@@ -19,6 +32,7 @@ enum PlayerState {Entry, Idle, Run, ChargeL, ChargeR, SwingL, SwingR}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	SetExpectedRotation(360)
 	PlayerAnimator.play("CupidIdle")
 	pass # Replace with function body.
 
@@ -27,39 +41,41 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	StateMachineCheck()
 	WallCheck()
+	PointerCheck()
 	pass
 
 func ChangeState(state: PlayerState) -> void:
 	CharacterState = state
+	SetPointerVisibility(false)
+	ResetPowerShotParams()
 	match(CharacterState):
 		PlayerState.Idle:
-			SetExpectedRotation(0)
+			SetExpectedRotation(360)
 			PlayerAnimator.play("CupidIdle")
 		PlayerState.Run:
 			if(IsMovingLeft):
-				SetExpectedRotation(90)
+				SetExpectedRotation(-200)
 			else:
-				SetExpectedRotation(-90)
+				SetExpectedRotation(200)
 			PlayerAnimator.play("CupidRun")
 		PlayerState.ChargeL:
-			SetExpectedRotation(0)
+			SetExpectedRotation(360)
+			SetPointerVisibility(true)
 			PlayerAnimator.play("CupidChargeL")
 		PlayerState.ChargeR:
-			SetExpectedRotation(0)
-
+			SetExpectedRotation(360)
+			SetPointerVisibility(true)
 			PlayerAnimator.play("CupidChargeR")
 		PlayerState.SwingL:
-			SetExpectedRotation(0)
-			CreateHitbox(Vector3(-1, 0, -1), 1)
+			SetExpectedRotation(360)
 			PlayerAnimator.play("SwingL")
 		PlayerState.SwingR:
-			SetExpectedRotation(0)
-			CreateHitbox(Vector3(1, 0, -1), 1)
+			SetExpectedRotation(360)
 			PlayerAnimator.play("SwingR")
 	pass
 
 func StateMachineCheck() -> void:
-	rotation.y = ThresholdLerp(rotation.y, ExpectedRotation, .5, .1)
+	PlayerModel.global_rotation.y = ThresholdLerp(rotation.y, ExpectedRotation, .5, .1)
 	match(CharacterState):
 	
 		PlayerState.Idle:
@@ -94,11 +110,17 @@ func StateMachineCheck() -> void:
 
 		PlayerState.ChargeL:
 			Velocity = Lerp(Velocity, 0, SlowSpeed)
+			ShotHoldBehavior()
+			
 			if Input.is_action_just_released("accept"):
+				CreateHitbox()
 				ChangeState(PlayerState.SwingL)
 		PlayerState.ChargeR:
 			Velocity = Lerp(Velocity, 0, SlowSpeed)
+			ShotHoldBehavior()
+			
 			if Input.is_action_just_released("accept"):
+				CreateHitbox()
 				ChangeState(PlayerState.SwingR)
 		PlayerState.SwingL:
 			Velocity = Lerp(Velocity, 0, StopSpeed)
@@ -119,9 +141,11 @@ func StateMachineCheck() -> void:
 	
 	position.x += Velocity
 	pass
-func CreateHitbox(direction:Vector3, power:float, lifetime:float = 1) -> void:
+
+func CreateHitbox() -> void:
 	var hitbox = hitboxPrefab.instantiate() as RacketHitbox
-	hitbox.HitDirection = direction
+	hitbox.HitDirection = vectorDirection
+	hitbox.Power = shotPower
 	add_child(hitbox)
 	pass
 
@@ -158,10 +182,36 @@ func MakeNegative(number: float) -> float:
 	return abs(number) * -1
 	pass	
 
-func SetExpectedRotation(degrees: float) -> void:
-	ExpectedRotation = degrees * 0.01745329 #Convert to Radians
+func ShotHoldBehavior() -> void:
+	if(Input.is_action_pressed("move_right")):
+		shotAngle = max(shotAngle - shotAngleSpeed, -shotAngleMax)
+	elif(Input.is_action_pressed("move_left")):
+		shotAngle = min(shotAngle + shotAngleSpeed, shotAngleMax)
+	shotPower = min(shotPower+shotPowerGrowth, shotPowerMax)
 	pass
 
+func SetExpectedRotation(degrees: float) -> void:
+	ExpectedRotation = DegreesToRadians(degrees)#Convert to Radians
+	pass
+
+func DegreesToRadians(degrees: float) -> float:
+	return degrees * 0.01745329 #Convert to Radians
+	pass
+
+func PointerCheck() -> void:
+	PointerCircle.rotation.y = DegreesToRadians(shotAngle)
+	var vectorDirectionVec2 : Vector2 = Vector2(cos(DegreesToRadians(shotAngle)), sin(DegreesToRadians(shotAngle)))
+	vectorDirection = Vector3(-vectorDirectionVec2.y, 0, -vectorDirectionVec2.x)
+	pass
+
+func SetPointerVisibility(vis:bool) -> void:
+	PointerCircle.visible = vis
+	pass
+func ResetPowerShotParams() -> void: 
+	shotAngle = 0
+	shotPower = shotPowerMin
+	PointerCircle.rotation.y = 0
+pass
 func Lerp (A: float, B: float, t: float) -> float:
 	return A + (B - A) * t
 	pass

@@ -7,16 +7,15 @@
 
 [node name="Node3D" type="Node3D" unique_id=290292971]
 
+[node name="PlayerChar" parent="." unique_id=1597109566 node_paths=PackedStringArray("ParentArena") instance=ExtResource("1_vxjsr")]
+ParentArena = NodePath("../BasicArena")
+
 [node name="Game Manager" type="Node3D" parent="." unique_id=1713758058]
 
 [node name="Camera3D" type="Camera3D" parent="Game Manager" unique_id=2025713363]
 transform = Transform3D(1, 0, 0, 0, 0.34202015, 0.9396926, 0, -0.9396926, 0.34202015, 0, 126.84735, 25.91952)
 projection = 1
 size = 65.0
-
-[node name="PlayerChar" parent="." unique_id=1597109566 node_paths=PackedStringArray("ParentArena") instance=ExtResource("1_vxjsr")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0.164, 0)
-ParentArena = NodePath("../BasicArena")
 
 [node name="BasicArena" parent="." unique_id=1168659013 instance=ExtResource("2_fjgpx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)

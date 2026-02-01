@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://5erg16mxksjf"]
+
+[ext_resource type="Texture2D" uid="uid://dqgcclj70ae8p" path="res://Assets/Textures/PointingRing.png" id="1_yjrdh"]
+
+[resource]
+transparency = 1
+albedo_texture = ExtResource("1_yjrdh")
+emission_enabled = true
+emission = Color(0, 1, 1, 1)

@@ -19,7 +19,7 @@ BallMesh = NodePath("MeshInstance3D")
 BallCollider = NodePath("CollisionShape3D")
 Direction = Vector3(1.557, 0, -0.6)
 Speed = 15.0
-Size = 3.0
+Size = 2.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=523936101]
 shape = SubResource("SphereShape3D_fi85q")
