@@ -17,14 +17,17 @@ func _physics_process(delta):
 		var normal = collision_info.get_normal()
 		if(Vector3.BACK.dot(normal) > 0.1 || Vector3.FORWARD.dot(normal) > 0.1):
 			FlipDirectionZ()
-
+			
+		if(Vector3.RIGHT.dot(normal) > 0.1 || Vector3.LEFT.dot(normal) > 0.1):
+					FlipDirectionX()
+	
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	#position += Direction * Speed
 	BallMesh.scale = Vector3(Size, Size, Size)
-	#BallCollider.scale = Vector3(Size, Size, Size)
+	BallCollider.scale = Vector3(Size, Size, Size)
 	WallCheck()
 	pass
 	

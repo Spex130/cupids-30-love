@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://dpsqau85hcxeg"]
+
+[ext_resource type="Script" uid="uid://4d1ndkoq752g" path="res://Scripts/PlayerChar.gd" id="1_xkjms"]
+[ext_resource type="PackedScene" uid="uid://dv87wmuejilrv" path="res://Assets/Cupid/Cupid.gltf" id="2_8tef0"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_j0hco"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_fjgpx"]
+
+[node name="PlayerChar" type="CharacterBody3D" unique_id=1597109566 node_paths=PackedStringArray("PlayerAnimator")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+collision_mask = 0
+script = ExtResource("1_xkjms")
+PlayerAnimator = NodePath("Cupid/AnimationPlayer")
+
+[node name="ShadowCaster_Main" type="MeshInstance3D" parent="." unique_id=991522337]
+transform = Transform3D(1.97, 0, 0, 0, 1.97, 0, 0, 0, 1.97, 0, 1.0000001, 0)
+cast_shadow = 3
+mesh = SubResource("SphereMesh_j0hco")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=630237037]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("SphereShape3D_fjgpx")
+
+[node name="Cupid" parent="." unique_id=924624951 instance=ExtResource("2_8tef0")]
+transform = Transform3D(-0.5, 0, -4.371139e-08, 0, 0.5, 0, 4.371139e-08, 0, -0.5, 0, 0, 0)
+
+[node name="Skeleton3D" parent="Cupid/metarig" parent_id_path=PackedInt32Array(924624951, 528931174) index="0" unique_id=1860117845]
+bones/23/rotation = Quaternion(0.9112156, 1.0107628e-07, 2.1960409e-07, -0.4119297)
+bones/27/rotation = Quaternion(-1.02093864e-07, 0.93368626, -0.35809237, -1.8179544e-07)
+bones/28/rotation = Quaternion(0.9112156, -1.0107629e-07, -2.1960409e-07, -0.4119297)
+
+[node name="Skeleton3D" parent="Cupid/rig" parent_id_path=PackedInt32Array(924624951, 1363104429) index="0" unique_id=567802538]
+bones/1/rotation = Quaternion(0.79045564, 1.4603602e-07, 1.8845938e-07, 0.6125194)
+bones/5/rotation = Quaternion(0.11127457, 3.273282e-14, 2.6529928e-08, 0.99378973)
+bones/6/rotation = Quaternion(-0.0033738068, -2.2201335e-15, -8.0438106e-10, 0.99999434)
+bones/10/rotation = Quaternion(0.70710677, 2.8670775e-06, 2.8670775e-06, 0.70710677)
+bones/11/rotation = Quaternion(0.70710677, -2.8670775e-06, -2.8670775e-06, 0.70710677)
+bones/43/rotation = Quaternion(-1.0102785e-07, 0.9336862, -0.3580924, -1.8179541e-07)
+bones/62/rotation = Quaternion(-0.7076113, -0.00010563485, 0.000105785744, 0.70660186)
+bones/63/rotation = Quaternion(-0.084365346, 7.0738038e-12, 2.5226076e-05, 0.9964349)
+bones/72/rotation = Quaternion(1.0102703e-07, 0.9336862, -0.3580924, 1.8179544e-07)
+bones/82/rotation = Quaternion(-0.08436534, 1.4603981e-11, 2.5226072e-05, 0.9964349)
+bones/91/rotation = Quaternion(-1.0102753e-07, 0.9336862, -0.3580924, -1.8179541e-07)
+bones/102/rotation = Quaternion(0.11127457, 2.1672925e-14, 2.6529927e-08, 0.99378973)
+bones/103/rotation = Quaternion(-0.0033738294, 2.8870303e-15, -8.043864e-10, 0.99999434)
+bones/107/rotation = Quaternion(-0.77169526, -7.5816246e-08, -9.1993286e-08, 0.6359926)
+bones/116/rotation = Quaternion(0.061995476, 0.70441383, -0.061739556, 0.7043763)
+bones/141/rotation = Quaternion(-0.03526901, -2.2577782e-07, -3.0491588e-08, 0.9993779)
+bones/171/rotation = Quaternion(-0.0352689, 1.6416412e-07, 3.0541184e-08, 0.9993779)
+
+[node name="Circle" parent="Cupid/rig/Skeleton3D" index="0" unique_id=2034748449]
+cast_shadow = 0
+
+[node name="Cone" parent="Cupid/rig/Skeleton3D" index="1" unique_id=1298848444]
+cast_shadow = 0
+
+[node name="Roundcube_001" parent="Cupid/rig/Skeleton3D" index="2" unique_id=1382972171]
+cast_shadow = 0
+
+[node name="Roundcube_002" parent="Cupid/rig/Skeleton3D" index="3" unique_id=1523128372]
+cast_shadow = 0
+
+[node name="Roundcube_003" parent="Cupid/rig/Skeleton3D" index="4" unique_id=1964740291]
+cast_shadow = 0
+
+[node name="Roundcube_004" parent="Cupid/rig/Skeleton3D" index="5" unique_id=680668676]
+cast_shadow = 0
+
+[node name="Roundcube_005" parent="Cupid/rig/Skeleton3D" index="6" unique_id=1630912371]
+cast_shadow = 0
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Cupid/rig/Skeleton3D" index="7" unique_id=963173112]
+transform = Transform3D(1.4256395e-06, -5.2154206e-08, 0.9999999, 0.9999999, 1.3098213e-07, -1.4419813e-06, -1.7912498e-07, 0.9999997, 6.705406e-08, -2.3379302, 2.9649713, -0.0041488693)
+bone_name = "cupid_racket"
+bone_idx = 175
+
+[node name="ShadowCaster_Racket" type="MeshInstance3D" parent="Cupid/rig/Skeleton3D/BoneAttachment3D" unique_id=2123910921]
+transform = Transform3D(1, 5.702933e-13, 0, -1.3677948e-13, 4.1159816, -4.1027623e-14, 3.5088533e-27, -3.523622e-14, 2.3728492, 1.6436025e-13, 1.0836743, -2.9802333e-08)
+cast_shadow = 3
+mesh = SubResource("SphereMesh_j0hco")
+skeleton = NodePath("../../../../..")
+
+[connection signal="animation_finished" from="Cupid/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+
+[editable path="Cupid"]

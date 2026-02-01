@@ -8,6 +8,11 @@ class_name PlayerChar extends Node3D
 @export var MaxWalkSpeed : float = 1
 @export var IsMovingLeft : bool = false
 @export var PlayerAnimator : AnimationPlayer 
+
+# Prefab PackedScenes
+
+@onready var hitboxPrefab = preload("res://Prefabs/RacketHitbox.tscn")
+
 var ExpectedRotation = 0
 enum PlayerState {Entry, Idle, Run, ChargeL, ChargeR, SwingL, SwingR}
 @export var CharacterState : PlayerState = PlayerState.Idle
@@ -45,11 +50,11 @@ func ChangeState(state: PlayerState) -> void:
 			PlayerAnimator.play("CupidChargeR")
 		PlayerState.SwingL:
 			SetExpectedRotation(0)
-
+			CreateHitbox(Vector3(-1, 0, -1), 1)
 			PlayerAnimator.play("SwingL")
 		PlayerState.SwingR:
 			SetExpectedRotation(0)
-
+			CreateHitbox(Vector3(1, 0, -1), 1)
 			PlayerAnimator.play("SwingR")
 	pass
 
@@ -113,6 +118,11 @@ func StateMachineCheck() -> void:
 			SwingIASA()
 	
 	position.x += Velocity
+	pass
+func CreateHitbox(direction:Vector3, power:float, lifetime:float = 1) -> void:
+	var hitbox = hitboxPrefab.instantiate() as RacketHitbox
+	hitbox.HitDirection = direction
+	add_child(hitbox)
 	pass
 
 func SwingIASA() -> void:

@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://bw0lclqtw68cc"]
+
+[ext_resource type="Script" uid="uid://c1to82w0p170a" path="res://Scripts/Ball.gd" id="1_hdy6r"]
+[ext_resource type="Material" uid="uid://bpu4jrwdv4ayr" path="res://VFX/Materials/Ball.tres" id="2_annej"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_fi85q"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_dhhj6"]
+material = ExtResource("2_annej")
+
+[sub_resource type="SphereMesh" id="SphereMesh_hdy6r"]
+
+[node name="Ball" type="RigidBody3D" unique_id=307144242 node_paths=PackedStringArray("BallMesh", "BallCollider")]
+collision_layer = 16
+collision_mask = 14
+gravity_scale = 0.0
+script = ExtResource("1_hdy6r")
+BallMesh = NodePath("MeshInstance3D")
+BallCollider = NodePath("CollisionShape3D")
+Direction = Vector3(1.557, 0, -0.6)
+Speed = 15.0
+Size = 3.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=523936101]
+shape = SubResource("SphereShape3D_fi85q")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1587804318]
+cast_shadow = 0
+mesh = SubResource("SphereMesh_dhhj6")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D" unique_id=28754663]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0339565, 0)
+cast_shadow = 3
+mesh = SubResource("SphereMesh_hdy6r")
+skeleton = NodePath("")

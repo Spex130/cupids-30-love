@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cbn16p1y3k8hj"]
+
+[ext_resource type="Script" uid="uid://cfvhlamdke3i" path="res://Scripts/RacketHitbox.gd" id="1_fhpxm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vxjsr"]
+size = Vector3(8, 8, 8)
+
+[node name="RacketHitbox" type="Node3D" unique_id=1634225451 node_paths=PackedStringArray("BallDetector")]
+script = ExtResource("1_fhpxm")
+BallDetector = NodePath("Area3D")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1938465116]
+collision_layer = 32
+collision_mask = 31
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=226081842]
+shape = SubResource("BoxShape3D_vxjsr")
+
+[connection signal="body_shape_entered" from="Area3D" to="." method="_on_area_3d_body_shape_entered"]

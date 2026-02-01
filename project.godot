@@ -68,3 +68,5 @@ decline={
 3d_physics/layer_2="blocks"
 3d_physics/layer_3="enemies"
 3d_physics/layer_4="bosses"
+3d_physics/layer_5="ball"
+3d_physics/layer_6="hitboxes"

@@ -11,5 +11,6 @@ albedo_texture = ExtResource("1_i5fhd")
 roughness = 0.5
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 3.0
 emission_operator = 1
 emission_texture = ExtResource("2_huspq")
