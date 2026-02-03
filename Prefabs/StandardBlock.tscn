@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://dhd3wfso77oit"]
 
+[ext_resource type="Script" uid="uid://c6uy7g57prowx" path="res://Scripts/BasicBlock.gd" id="1_abn1r"]
 [ext_resource type="PackedScene" uid="uid://ci3iopn0hltfm" path="res://Assets/Models/BrickBlock/BrickBlock.glb" id="1_jicbx"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_fjgpx"]
@@ -9,6 +10,7 @@ size = Vector3(10, 4, 6)
 size = Vector3(8, 4, 4)
 
 [node name="StandardBlock" type="Node3D" unique_id=1456113384]
+script = ExtResource("1_abn1r")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1105271041]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.9007168, 0)

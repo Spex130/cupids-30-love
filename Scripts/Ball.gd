@@ -6,6 +6,7 @@ class_name Ball extends RigidBody3D
 @export var Speed : float = 1
 @export var Size : float = 1
 @export var ParentArena : Arena
+var normal
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -14,13 +15,32 @@ func _ready() -> void:
 func _physics_process(delta):
 	var collision_info = move_and_collide(Direction * Speed * delta)
 	if(collision_info != null):
-		var normal = collision_info.get_normal()
+		normal = collision_info.get_normal()
+		
+		#Check if Block
+		print(collision_info.get_collider())
+		var block = GetTopLevelParent(collision_info.get_collider()) as Node3D
+		if(block != null):
+			print("Block!")
+			block.GetHit(1)
+			
+		#Ball Bounce logic
 		if(Vector3.BACK.dot(normal) > 0.1 || Vector3.FORWARD.dot(normal) > 0.1):
 			FlipDirectionZ()
 			
 		if(Vector3.RIGHT.dot(normal) > 0.1 || Vector3.LEFT.dot(normal) > 0.1):
 					FlipDirectionX()
 	
+	pass
+
+#Recursive Function to find Parent. top_level
+func GetTopLevelParent(node:Node3D) -> Node3D:
+	if(node.top_level):
+		return node
+	elif(node.get_parent_node_3d() != null):
+		return GetTopLevelParent(node.get_parent_node_3d())
+	else:
+		return null
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

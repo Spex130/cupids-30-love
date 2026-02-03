@@ -22,6 +22,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
 
 [node name="Ball" parent="." unique_id=307144242 node_paths=PackedStringArray("ParentArena") instance=ExtResource("3_j0hco")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.047788, -6.8510394)
+contact_monitor = true
+max_contacts_reported = 2
 Direction = Vector3(0, 0, -0.6)
 ParentArena = NodePath("../BasicArena")
 
@@ -30,9 +32,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0339563, 0)
 
 [node name="StandardBlock" parent="." unique_id=1456113384 instance=ExtResource("4_fi85q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -21.156385)
+top_level = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1100598844]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 39.73079, 0)
 shadow_enabled = true
 
 [editable path="Ball"]
+[editable path="StandardBlock"]
