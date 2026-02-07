@@ -24,6 +24,6 @@ func _on_area_3d_body_shape_entered(body_rid, body, body_shape_index, local_shap
 		var ballCollider = ball.get_child(0) as CollisionShape3D
 		if(ballCollider!= null):
 			#print("Pongball Detected!")
-			ball.Direction = HitDirection * Power
+			ball.LaunchBall(HitDirection * Power)
 			queue_free()
 	pass 

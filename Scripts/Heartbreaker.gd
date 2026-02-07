@@ -6,6 +6,7 @@ class_name Heartbreaker extends CharacterBody3D
 @export var player: PlayerChar
 @export var animator : AnimationPlayer
 @export var moveTimer:Timer
+@export var collider:CollisionShape3D
 
 #spawn-in
 var hasSpawned:bool = false
@@ -84,6 +85,7 @@ func GetHit(damage:int):
 	if(health <= 0):
 		isDead = true
 		gameManager.RemoveEnemy(self)
+		collider.disabled = true
 		animator.play("Heartbreaker_Death")
 	else:
 		animator.play("Heartbreaker_Hit")

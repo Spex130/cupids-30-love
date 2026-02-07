@@ -1,0 +1,23 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cnfm52kyhwg1f"]
+
+[ext_resource type="Shader" uid="uid://cushh0c2c31t0" path="res://VFX/Shaders/OutlineShader.gdshader" id="1_bmlw1"]
+[ext_resource type="Shader" uid="uid://kugqxw1vx05q" path="res://VFX/Shaders/Matcap.gdshader" id="2_4mbfk"]
+[ext_resource type="Texture2D" uid="uid://q2rgcvdypaim" path="res://Assets/Textures/CelMatcap.png" id="3_sljti"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rlncs"]
+render_priority = 0
+shader = ExtResource("1_bmlw1")
+shader_parameter/scale = 1.0
+shader_parameter/outline_spread = 1.0
+shader_parameter/_Color = Color(0, 0, 0, 1)
+shader_parameter/_DepthNormalThreshold = 0.1
+shader_parameter/_DepthNormalThresholdScale = -2.17
+shader_parameter/_DepthThreshold = 1.5
+shader_parameter/_NormalThreshold = 2.0
+
+[resource]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_rlncs")
+shader = ExtResource("2_4mbfk")
+shader_parameter/matcap = ExtResource("3_sljti")
+shader_parameter/_Color = Color(1, 0.5311426, 0.8899074, 1)

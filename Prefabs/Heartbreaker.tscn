@@ -6,13 +6,14 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_j0hco"]
 size = Vector3(4.294922, 5.6188965, 1.4697266)
 
-[node name="Enemy" type="CharacterBody3D" unique_id=18948008 node_paths=PackedStringArray("animator", "moveTimer")]
+[node name="Enemy" type="CharacterBody3D" unique_id=18948008 node_paths=PackedStringArray("animator", "moveTimer", "collider")]
 top_level = true
 collision_layer = 4
 collision_mask = 16
 script = ExtResource("1_bjstk")
 animator = NodePath("HeartBreaker/AnimationPlayer")
 moveTimer = NodePath("Timer")
+collider = NodePath("CollisionShape3D")
 PatrolSpot1 = Vector3(-25, 0, -28.066)
 PatrolSpot2 = Vector3(25, 0, -28.066)
 

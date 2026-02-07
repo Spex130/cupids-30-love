@@ -1,0 +1,194 @@
+[gd_scene format=3 uid="uid://c7478fm4usabt"]
+
+[ext_resource type="Script" uid="uid://dk4mvcxprrh6n" path="res://Scripts/UIManager.gd" id="1_f7we3"]
+[ext_resource type="Script" uid="uid://k2gatxh1qkxj" path="res://Scripts/PauseManager.gd" id="2_8u7ed"]
+[ext_resource type="Texture2D" uid="uid://04pw4xqndqqe" path="res://Assets/Textures/Kenney UI/button_square_line.png" id="2_orawy"]
+[ext_resource type="Texture2D" uid="uid://bivgp8lw2318g" path="res://Assets/Textures/Kenney UI/button_rectangle_depth_line.png" id="3_8ed3u"]
+[ext_resource type="FontFile" uid="uid://cvdpwhuliucoe" path="res://Assets/Fonts/Adorable.otf" id="3_jic1q"]
+[ext_resource type="Texture2D" uid="uid://exm3fww0krde" path="res://Assets/Textures/Kenney UI/button_rectangle_border.png" id="4_jic1q"]
+[ext_resource type="Texture2D" uid="uid://be7khmiptftsk" path="res://Assets/Textures/Kenney UI/button_rectangle_depth_border.png" id="5_8u7ed"]
+
+[node name="Control" type="Control" unique_id=1712166761 node_paths=PackedStringArray("ChargeDisplay", "lifelabel", "levellabel")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_f7we3")
+ChargeDisplay = NodePath("VBoxContainer/ProgressBar")
+lifelabel = NodePath("VBoxContainer/HBoxContainer/RichTextLabel2")
+levellabel = NodePath("VBoxContainer/HBoxContainer3/RichTextLabel2")
+
+[node name="PauseManager" type="Node" parent="." unique_id=1125756655 node_paths=PackedStringArray("pausecontainer", "targetButton")]
+process_mode = 3
+script = ExtResource("2_8u7ed")
+pausecontainer = NodePath("")
+targetButton = NodePath("")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=238472157]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 1
+offset_right = 150.0
+offset_bottom = 200.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1250126016]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer" unique_id=139934671]
+clip_contents = false
+custom_minimum_size = Vector2(40, 25)
+layout_mode = 2
+text = "💖:"
+scroll_active = false
+vertical_alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="VBoxContainer/HBoxContainer" unique_id=1532334368]
+clip_contents = false
+custom_minimum_size = Vector2(80, 25)
+layout_mode = 2
+text = "Health"
+scroll_active = false
+vertical_alignment = 1
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="VBoxContainer" unique_id=2045299465]
+clip_contents = false
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+text = "Charge Power"
+scroll_active = false
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer" unique_id=1613728942]
+custom_minimum_size = Vector2(0, 23.29)
+layout_mode = 2
+min_value = 1.5
+max_value = 3.0
+value = 1.5
+show_percentage = false
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer" unique_id=14472003]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer3" unique_id=664040928]
+clip_contents = false
+custom_minimum_size = Vector2(40, 25)
+layout_mode = 2
+text = "LVL:"
+scroll_active = false
+vertical_alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="VBoxContainer/HBoxContainer3" unique_id=628826734]
+clip_contents = false
+custom_minimum_size = Vector2(80, 25)
+layout_mode = 2
+text = "0"
+scroll_active = false
+vertical_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1469436940]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseContainer" type="NinePatchRect" parent="CenterContainer" unique_id=293967062]
+custom_minimum_size = Vector2(200, 256)
+layout_mode = 2
+texture = ExtResource("2_orawy")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PauseContainer" unique_id=1130561718]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -109.0
+offset_right = 75.0
+offset_bottom = 109.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="CenterContainer/PauseContainer/VBoxContainer" unique_id=2107326797]
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/normal_font = ExtResource("3_jic1q")
+theme_override_font_sizes/normal_font_size = 25
+text = "Pause"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="CenterContainer/PauseContainer/VBoxContainer" unique_id=1745621081]
+custom_minimum_size = Vector2(150, 70)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("3_8ed3u")
+texture_pressed = ExtResource("4_jic1q")
+texture_hover = ExtResource("3_8ed3u")
+texture_disabled = ExtResource("5_8u7ed")
+texture_focused = ExtResource("3_8ed3u")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer/PauseContainer/VBoxContainer/TextureButton" unique_id=1358253976]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/normal_font = ExtResource("3_jic1q")
+theme_override_font_sizes/normal_font_size = 25
+text = "Resume"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton2" type="TextureButton" parent="CenterContainer/PauseContainer/VBoxContainer" unique_id=1576205040]
+custom_minimum_size = Vector2(150, 70)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("3_8ed3u")
+texture_pressed = ExtResource("4_jic1q")
+texture_hover = ExtResource("3_8ed3u")
+texture_disabled = ExtResource("5_8u7ed")
+texture_focused = ExtResource("3_8ed3u")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="CenterContainer/PauseContainer/VBoxContainer/TextureButton2" unique_id=1701060646]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/normal_font = ExtResource("3_jic1q")
+theme_override_font_sizes/normal_font_size = 25
+text = "Quit
+"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1

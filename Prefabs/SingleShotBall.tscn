@@ -1,43 +1,47 @@
-[gd_scene format=3 uid="uid://bw0lclqtw68cc"]
+[gd_scene format=3 uid="uid://byh5ymchcbpup"]
 
-[ext_resource type="Script" uid="uid://c1to82w0p170a" path="res://Scripts/Ball.gd" id="1_hdy6r"]
-[ext_resource type="Material" uid="uid://bpu4jrwdv4ayr" path="res://VFX/Materials/Ball.tres" id="2_annej"]
+[ext_resource type="Script" uid="uid://c1to82w0p170a" path="res://Scripts/Ball.gd" id="1_l8teu"]
+[ext_resource type="Material" uid="uid://cnfm52kyhwg1f" path="res://VFX/Materials/BallPink.tres" id="2_l8teu"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_fi85q"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_dhhj6"]
-material = ExtResource("2_annej")
+material = ExtResource("2_l8teu")
 
 [sub_resource type="SphereMesh" id="SphereMesh_hdy6r"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hdy6r"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l8teu"]
+resource_local_to_scene = true
+albedo_color = Color(1, 0.5686275, 1, 1)
 emission_enabled = true
-emission = Color(1, 1, 1, 1)
+emission = Color(1, 0.59607846, 1, 1)
 
-[sub_resource type="Curve" id="Curve_annej"]
+[sub_resource type="Curve" id="Curve_b37oh"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.99999, 0), -2.5837476, -2.5837476, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_fnr1w"]
-curve = SubResource("Curve_annej")
+curve = SubResource("Curve_b37oh")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hdy6r"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rqpga"]
 particle_flag_align_y = true
 gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_fnr1w")
 
-[sub_resource type="SphereMesh" id="SphereMesh_8opgt"]
+[sub_resource type="SphereMesh" id="SphereMesh_e7b7i"]
 
 [node name="Ball" type="RigidBody3D" unique_id=307144242 node_paths=PackedStringArray("BallMesh", "BallCollider")]
 collision_layer = 16
 collision_mask = 14
 gravity_scale = 0.0
-script = ExtResource("1_hdy6r")
+script = ExtResource("1_l8teu")
 BallMesh = NodePath("MeshInstance3D")
 BallCollider = NodePath("CollisionShape3D")
 Direction = Vector3(1.557, 0, -0.6)
 Speed = 15.0
 Size = 2.0
+FollowClosenessMargin = 3
+UseBounceCount = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=523936101]
 shape = SubResource("SphereShape3D_fi85q")
@@ -53,7 +57,8 @@ cast_shadow = 3
 mesh = SubResource("SphereMesh_hdy6r")
 skeleton = NodePath("")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=583658515]
-material_override = SubResource("StandardMaterial3D_hdy6r")
-process_material = SubResource("ParticleProcessMaterial_hdy6r")
-draw_pass_1 = SubResource("SphereMesh_8opgt")
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1947458346]
+material_override = SubResource("StandardMaterial3D_l8teu")
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_rqpga")
+draw_pass_1 = SubResource("SphereMesh_e7b7i")

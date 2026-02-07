@@ -10,6 +10,7 @@ class_name PlayerChar extends Node3D
 @export var MaxWalkSpeed : float = 0.5
 @export var IsMovingLeft : bool = false
 @export var PlayerAnimator : AnimationPlayer 
+@export var TempBallList : Dictionary = {}
 
 #Power Shot vars
 @export var shotAngle : float = 0
@@ -25,6 +26,7 @@ var shotPowerGrowth = .01
 # Prefab PackedScenes
 
 @onready var hitboxPrefab = preload("res://Prefabs/RacketHitbox.tscn")
+@onready var singleshotPrefab = preload("res://Prefabs/SingleShotBall.tscn")
 
 var ExpectedRotation = 0
 enum PlayerState {Entry, Idle, Run, ChargeL, ChargeR, SwingL, SwingR}
@@ -87,11 +89,14 @@ func StateMachineCheck() -> void:
 			elif Input.is_action_pressed("move_left"):
 				IsMovingLeft = true
 				ChangeState(PlayerState.Run)
-			elif Input.is_action_pressed("accept"):
+			if Input.is_action_pressed("accept"):
 				if(IsMovingLeft):
 					ChangeState(PlayerState.ChargeL)
 				else:
 					ChangeState(PlayerState.ChargeR)
+					
+			if Input.is_action_just_released("decline"):
+				CreateOneshotBall()
 				
 		PlayerState.Run:
 			if IsMovingLeft == false:
@@ -104,7 +109,10 @@ func StateMachineCheck() -> void:
 					ChangeState(PlayerState.ChargeL)
 				else:
 					ChangeState(PlayerState.ChargeR)
-			
+					
+			if Input.is_action_just_released("decline"):
+				CreateOneshotBall()
+					
 			if Input.is_action_just_released("move_right") || Input.is_action_just_released("move_left"):
 				ChangeState(PlayerState.Idle)
 
@@ -115,6 +123,7 @@ func StateMachineCheck() -> void:
 			if Input.is_action_just_released("accept"):
 				CreateHitbox()
 				ChangeState(PlayerState.SwingL)
+
 		PlayerState.ChargeR:
 			Velocity = Lerp(Velocity, 0, SlowSpeed)
 			ShotHoldBehavior()
@@ -122,6 +131,7 @@ func StateMachineCheck() -> void:
 			if Input.is_action_just_released("accept"):
 				CreateHitbox()
 				ChangeState(PlayerState.SwingR)
+				
 		PlayerState.SwingL:
 			Velocity = Lerp(Velocity, 0, StopSpeed)
 			if Input.is_action_pressed("accept") && PlayerAnimator.current_animation_position > .2:
@@ -222,6 +232,21 @@ func ThresholdLerp (A: float, B: float, t: float, threshold:float) -> float:
 	return A + (B - A) * t
 	pass
 
+func CreateOneshotBall():
+	var count = TempBallList.size()
+	if count < 2:
+		var ball = singleshotPrefab.instantiate() as Ball
+		ball.position = position + Vector3.UP * ball.FollowClosenessMargin * 5
+		ball.FollowTarget = self
+		ball.LaunchMode = true
+		ball.ParentArena = ParentArena
+		if count == 0:
+			ball.LaunchPoint = ball.FollowSpot.Left
+		else:
+			ball.LaunchPoint = ball.FollowSpot.Right
+		get_parent().add_child(ball)
+		TempBallList[ball] = ball
+	pass
 
 func _on_animation_player_animation_finished(anim_name):
 	match anim_name:

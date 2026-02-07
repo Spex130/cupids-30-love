@@ -3,3 +3,5 @@ By: Spex130
 
 Plugins:
 Cozy Cube Godot Addons by Cozy Cube Games
+Kenney.NL (UI)
+Hawtpixel Fonts (Darrell Flood)

@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://4hl8fep3aqgf"]
+
+[ext_resource type="Shader" uid="uid://dfbsiivna124h" path="res://VFX/Shaders/ScrollingBG.gdshader" id="1_3eju3"]
+
+[resource]
+shader = ExtResource("1_3eju3")
+shader_parameter/motion = Vector2(1, 1)
+shader_parameter/scale = 0.1
+shader_parameter/offset = Vector2(0, 0)
