@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://ctrtmfb6b3p3s"]
+
+[resource]
+resource_name = "EmitBlack"
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission_operator = 1

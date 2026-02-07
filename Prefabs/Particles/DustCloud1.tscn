@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://dwulamwcx3anp"]
+
+[ext_resource type="Material" uid="uid://b1dkqw78nxkjl" path="res://VFX/Particle Materials/DustCloud.tres" id="1_fxi6x"]
+
+[sub_resource type="Curve" id="Curve_he22b"]
+_data = [Vector2(0, 1), 0.0, -1.011576e-06, 0, 0, Vector2(0.90235686, 0), -4.092425, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ymteq"]
+curve = SubResource("Curve_he22b")
+
+[sub_resource type="Curve" id="Curve_dxxoj"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_boopq"]
+curve = SubResource("Curve_dxxoj")
+
+[sub_resource type="Curve" id="Curve_njd88"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.946437, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_qhgtc"]
+curve = SubResource("Curve_njd88")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_r0vmo"]
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+angular_velocity_min = -720.0
+angular_velocity_max = 719.99994
+angular_velocity_curve = SubResource("CurveTexture_boopq")
+gravity = Vector3(0, 3, 0)
+scale_curve = SubResource("CurveTexture_qhgtc")
+alpha_curve = SubResource("CurveTexture_ymteq")
+
+[sub_resource type="QuadMesh" id="QuadMesh_wbji2"]
+
+[node name="Node3D" type="Node3D" unique_id=1557916387]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=545108693]
+material_override = ExtResource("1_fxi6x")
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_r0vmo")
+draw_pass_1 = SubResource("QuadMesh_wbji2")

@@ -18,10 +18,10 @@ func _physics_process(delta):
 		normal = collision_info.get_normal()
 		
 		#Check if Block
-		print(collision_info.get_collider())
+		#print(collision_info.get_collider())
 		var block = GetTopLevelParent(collision_info.get_collider()) as Node3D
 		if(block != null):
-			print("Block!")
+			#print("Block!")
 			block.GetHit(1)
 			
 		#Ball Bounce logic

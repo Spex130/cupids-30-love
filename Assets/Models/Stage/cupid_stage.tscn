@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://cqwgwo1xqhrio"]
+
+[ext_resource type="PackedScene" uid="uid://ccwr4ofb1cm7b" path="res://Assets/Models/Stage/CupidStage.gltf" id="1_ojagr"]
+
+[node name="CupidStage" unique_id=72446042 instance=ExtResource("1_ojagr")]

@@ -5,6 +5,8 @@
 [ext_resource type="Material" uid="uid://5erg16mxksjf" path="res://VFX/Materials/Player Materials/PointerCircle.tres" id="3_8tef0"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_j0hco"]
+radius = 0.25
+height = 0.5
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_fjgpx"]
 
@@ -28,7 +30,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("SphereShape3D_fjgpx")
 
 [node name="Cupid" parent="." unique_id=924624951 instance=ExtResource("2_8tef0")]
-transform = Transform3D(-0.5, 0, -4.371139e-08, 0, 0.5, 0, 4.371139e-08, 0, -0.5, 0, 0, 0)
+transform = Transform3D(-0.35, 0, -5.284853e-08, 0, 0.35, 0, 5.284853e-08, 0, -0.35, 0, 0, 0)
 
 [node name="Skeleton3D" parent="Cupid/metarig" parent_id_path=PackedInt32Array(924624951, 528931174) index="0" unique_id=1860117845]
 bones/23/rotation = Quaternion(0.9112156, 1.0107628e-07, 2.1960409e-07, -0.4119297)
@@ -87,7 +89,7 @@ mesh = SubResource("SphereMesh_j0hco")
 skeleton = NodePath("../../../../..")
 
 [node name="PointerCircle" type="MeshInstance3D" parent="." unique_id=642174444]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1.1048418, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.1282413, 0)
 visible = false
 material_override = ExtResource("3_8tef0")
 mesh = SubResource("PlaneMesh_867md")
