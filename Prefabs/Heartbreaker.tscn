@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://b6rjcj410tn4p"]
+
+[ext_resource type="Script" uid="uid://c32lqyjcxqb4a" path="res://Scripts/Heartbreaker.gd" id="1_bjstk"]
+[ext_resource type="PackedScene" uid="uid://b0sym2jn4xjm3" path="res://Assets/Models/Entities/HeartBreaker/HeartBreaker.gltf" id="2_hy52j"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j0hco"]
+size = Vector3(4.294922, 5.6188965, 1.4697266)
+
+[node name="Enemy" type="CharacterBody3D" unique_id=18948008 node_paths=PackedStringArray("animator", "moveTimer")]
+top_level = true
+collision_layer = 4
+collision_mask = 16
+script = ExtResource("1_bjstk")
+animator = NodePath("HeartBreaker/AnimationPlayer")
+moveTimer = NodePath("Timer")
+PatrolSpot1 = Vector3(-25, 0, -28.066)
+PatrolSpot2 = Vector3(25, 0, -28.066)
+
+[node name="Timer" type="Timer" parent="." unique_id=555076270]
+wait_time = 6.0
+
+[node name="HeartBreaker" parent="." unique_id=1401139901 instance=ExtResource("2_hy52j")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="Skeleton3D" parent="HeartBreaker/HeartbreakerArma" parent_id_path=PackedInt32Array(1401139901, 148013729) index="0" unique_id=1260866950]
+bones/2/rotation = Quaternion(0, 8.742278e-08, 0, 1)
+bones/3/position = Vector3(0, -1.2980698, 0)
+bones/3/scale = Vector3(0, 0, 0)
+bones/4/position = Vector3(-3.0199158e-07, 0, -4)
+bones/4/rotation = Quaternion(0.70710695, 0, -0.7071066, 0)
+bones/4/scale = Vector3(0, 0, 0)
+bones/5/position = Vector3(0, 0, -4)
+bones/5/scale = Vector3(0, 0, 0)
+bones/6/position = Vector3(0, 0, -4)
+bones/6/scale = Vector3(0, 0, 0)
+bones/7/position = Vector3(0, 0, -4)
+bones/7/scale = Vector3(0, 0, 0)
+bones/8/position = Vector3(7.4505806e-07, 1.5795231e-06, -4)
+bones/8/rotation = Quaternion(2.5190698e-07, 7.32717e-08, -0.7666333, 0.6420852)
+bones/8/scale = Vector3(0, 0, 0)
+bones/9/position = Vector3(2.1825954e-07, -2.9802322e-08, -4)
+bones/9/rotation = Quaternion(-2.5240885e-08, -1.9547523e-08, 0.088068776, 0.9961145)
+bones/9/scale = Vector3(0, 0, 0)
+bones/10/position = Vector3(-1.5364389e-08, -1.4901161e-07, -4)
+bones/10/rotation = Quaternion(1.9111356e-08, 4.740744e-08, -0.06077211, 0.99815166)
+bones/10/scale = Vector3(0, 0, 0)
+bones/11/position = Vector3(5.662441e-07, -4.4703484e-07, -4)
+bones/11/rotation = Quaternion(6.912737e-08, -2.2635672e-07, 0.7666333, 0.6420852)
+bones/11/scale = Vector3(0, 0, 0)
+bones/12/position = Vector3(-2.1825937e-07, -2.9802322e-08, -4)
+bones/12/rotation = Quaternion(-2.5240887e-08, 1.95475e-08, -0.088068776, 0.9961145)
+bones/12/scale = Vector3(0, 0, 0)
+bones/13/position = Vector3(-4.577475e-07, -2.0861626e-07, -4)
+bones/13/rotation = Quaternion(1.9111349e-08, -4.740744e-08, 0.06077211, 0.99815166)
+bones/13/scale = Vector3(0, 0, 0)
+bones/14/position = Vector3(0, 1.6135392, 0)
+bones/14/scale = Vector3(0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1196852029]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3949435, 0)
+shape = SubResource("BoxShape3D_j0hco")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="animation_finished" from="HeartBreaker/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+
+[editable path="HeartBreaker"]

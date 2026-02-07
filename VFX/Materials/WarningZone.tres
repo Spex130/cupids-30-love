@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dmip057yhq4f7"]
+
+[ext_resource type="Shader" uid="uid://c76kbaxe0nub3" path="res://VFX/Shaders/ScrollingTexture.gdshader" id="1_n630d"]
+[ext_resource type="Texture2D" uid="uid://8rj2b7c1670" path="res://Assets/Textures/WarningTape.png" id="2_85wy7"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_n630d")
+shader_parameter/textureScaleX = 10.0
+shader_parameter/textureScaleY = 1.0
+shader_parameter/scrollSpeed = 1.0
+shader_parameter/maintexture = ExtResource("2_85wy7")
+shader_parameter/_Color = Color(1, 1, 1, 1)

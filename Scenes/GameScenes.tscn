@@ -4,20 +4,25 @@
 [ext_resource type="PackedScene" uid="uid://d16d454f5kqn1" path="res://Prefabs/basic_arena.tscn" id="2_fjgpx"]
 [ext_resource type="Script" uid="uid://ba0prb3nbja8w" path="res://Scripts/GameManager.gd" id="2_j0hco"]
 [ext_resource type="PackedScene" uid="uid://bw0lclqtw68cc" path="res://Prefabs/Ball.tscn" id="3_j0hco"]
-[ext_resource type="PackedScene" uid="uid://b0sym2jn4xjm3" path="res://Assets/Models/Entities/HeartBreaker/HeartBreaker.gltf" id="5_fjgpx"]
-[ext_resource type="Script" uid="uid://c32lqyjcxqb4a" path="res://Scripts/Heartbreaker.gd" id="5_j0hco"]
+[ext_resource type="Script" uid="uid://k2gatxh1qkxj" path="res://Scripts/PauseManager.gd" id="6_fi85q"]
+[ext_resource type="Material" uid="uid://dmip057yhq4f7" path="res://VFX/Materials/WarningZone.tres" id="6_j0hco"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_j0hco"]
-size = Vector3(4.294922, 5.6188965, 1.4697266)
+[sub_resource type="BoxShape3D" id="BoxShape3D_fjgpx"]
+size = Vector3(61, 6.694214, 3)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_j0hco"]
+size = Vector2(61, 3)
 
 [node name="Node3D" type="Node3D" unique_id=290292971]
 
 [node name="PlayerChar" parent="." unique_id=1597109566 node_paths=PackedStringArray("ParentArena") instance=ExtResource("1_vxjsr")]
 ParentArena = NodePath("../BasicArena")
 
-[node name="Game Manager" type="Node3D" parent="." unique_id=1713758058 node_paths=PackedStringArray("GameArena")]
+[node name="Game Manager" type="Node3D" parent="." unique_id=1713758058 node_paths=PackedStringArray("player", "GameArena", "GameOverZone")]
 script = ExtResource("2_j0hco")
+player = NodePath("../PlayerChar")
 GameArena = NodePath("../BasicArena")
+GameOverZone = NodePath("../GameOverZone/Area3D")
 
 [node name="Camera3D" type="Camera3D" parent="Game Manager" unique_id=2025713363]
 transform = Transform3D(1, 0, 0, 0, 0.34202015, 0.9396926, 0, -0.9396926, 0.34202015, 0, 126.84735, 25.91952)
@@ -31,10 +36,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
 transform = Transform3D(60, 0, 0, 0, 0.5, 0, 0, 0, 60, 0, -0.773, -8)
 
 [node name="Ball" parent="." unique_id=307144242 node_paths=PackedStringArray("ParentArena") instance=ExtResource("3_j0hco")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.047788, -6.8510394)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.047788, -3.5681376)
 contact_monitor = true
 max_contacts_reported = 2
-Direction = Vector3(0, 0, -0.6)
+Direction = Vector3(0, 0, 0)
 ParentArena = NodePath("../BasicArena")
 
 [node name="MeshInstance3D2" parent="Ball/MeshInstance3D" parent_id_path=PackedInt32Array(307144242, 1587804318) index="0" unique_id=28754663]
@@ -44,59 +49,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0339563, 0)
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 39.73079, 0)
 shadow_enabled = true
 
-[node name="Enemy" type="CharacterBody3D" parent="." unique_id=166086138 node_paths=PackedStringArray("arena", "player", "animator", "moveTimer")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -28.066439)
-collision_layer = 4
-collision_mask = 16
-script = ExtResource("5_j0hco")
-arena = NodePath("../BasicArena")
-player = NodePath("../PlayerChar")
-animator = NodePath("HeartBreaker/AnimationPlayer")
-moveTimer = NodePath("Timer")
-enemyType = 1
-PatrolSpot1 = Vector3(-25, 0, -28.066)
-PatrolSpot2 = Vector3(25, 0, -28.066)
+[node name="GameOverZone" type="Node3D" parent="." unique_id=531160631]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.931444)
 
-[node name="Timer" type="Timer" parent="Enemy" unique_id=830409243]
-wait_time = 6.0
+[node name="Area3D" type="Area3D" parent="GameOverZone" unique_id=1095333569]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.170804)
 
-[node name="HeartBreaker" parent="Enemy" unique_id=1401139901 instance=ExtResource("5_fjgpx")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameOverZone/Area3D" unique_id=1988228441]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.847107, 0)
+shape = SubResource("BoxShape3D_fjgpx")
 
-[node name="Skeleton3D" parent="Enemy/HeartBreaker/HeartbreakerArma" parent_id_path=PackedInt32Array(1401139901, 148013729) index="0" unique_id=1260866950]
-bones/3/position = Vector3(0, 0.22329345, 0)
-bones/4/position = Vector3(0, -0.09509856, 0)
-bones/4/rotation = Quaternion(0.7071069, -3.5527137e-15, -0.70710665, 6.322027e-08)
-bones/4/scale = Vector3(1.0000001, 1, 1.0000001)
-bones/7/rotation = Quaternion(-0.003672361, 0.009379268, 0.061356403, 0.9980651)
-bones/8/position = Vector3(0.38716522, 0.37681785, -0.0013161991)
-bones/8/rotation = Quaternion(-0.088295795, -0.0038713503, -0.89725715, 0.43257204)
-bones/8/scale = Vector3(1, 1, 1.0000001)
-bones/9/position = Vector3(-5.157652e-09, 0.4645592, -2.9802358e-08)
-bones/9/rotation = Quaternion(0.027233928, -0.012270794, -0.23351008, 0.97189546)
-bones/9/scale = Vector3(1.0000001, 1.0000001, 0.9999999)
-bones/10/position = Vector3(8.283019e-08, 0.49584332, -2.9802285e-08)
-bones/10/rotation = Quaternion(0.02787107, -0.04199474, -0.39525777, 0.91718644)
-bones/10/scale = Vector3(0.99999994, 0.99999994, 0.9999999)
-bones/11/position = Vector3(-0.38716522, 0.37681785, -0.0013163838)
-bones/11/rotation = Quaternion(-0.08829598, 0.0038712525, 0.8972571, 0.4325722)
-bones/11/scale = Vector3(1.0000002, 1.0000001, 1.0000001)
-bones/12/position = Vector3(-2.9375006e-08, 0.46455944, -1.4901195e-08)
-bones/12/rotation = Quaternion(0.027233897, 0.012270788, 0.23351014, 0.9718955)
-bones/12/scale = Vector3(1.0000002, 1.0000002, 0.9999998)
-bones/13/position = Vector3(-3.406066e-08, 0.49584326, 1.49011585e-08)
-bones/13/rotation = Quaternion(0.027870998, 0.04199472, 0.39525786, 0.9171864)
-bones/13/scale = Vector3(1.0000001, 0.9999998, 0.99999994)
-bones/14/position = Vector3(0, 1.2189538, 0)
-bones/14/rotation = Quaternion(0, -0.96847105, 0, 0.24912639)
-bones/14/scale = Vector3(0.90255195, 0.90255195, 0.90255195)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GameOverZone/Area3D" unique_id=1410877046]
+material_override = ExtResource("6_j0hco")
+mesh = SubResource("PlaneMesh_j0hco")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy" unique_id=2109234846]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3949435, 0)
-shape = SubResource("BoxShape3D_j0hco")
-
-[connection signal="timeout" from="Enemy/Timer" to="Enemy" method="_on_timer_timeout"]
+[node name="PauseManager" type="Node" parent="." unique_id=1547064893]
+process_mode = 3
+script = ExtResource("6_fi85q")
 
 [editable path="BasicArena"]
 [editable path="Ball"]
-[editable path="Enemy/HeartBreaker"]

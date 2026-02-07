@@ -14,16 +14,24 @@ func _ready() -> void:
 
 func _physics_process(delta):
 	var collision_info = move_and_collide(Direction * Speed * delta)
+	var TypeIsFound = false
 	if(collision_info != null):
 		normal = collision_info.get_normal()
 		
 		#Check if Block
 		#print(collision_info.get_collider())
-		var block = GetTopLevelParent(collision_info.get_collider()) as Node3D
+		var block = GetTopLevelParent(collision_info.get_collider()) as BasicBlock
 		if(block != null):
-			#print("Block!")
+			TypeIsFound = true
 			block.GetHit(1)
 			
+		#Check if Heartbreaker
+		if(!TypeIsFound):
+			var heartBreaker = GetTopLevelParent(collision_info.get_collider()) as Heartbreaker
+			if(heartBreaker != null):
+				TypeIsFound = true
+				heartBreaker.GetHit(1)
+				
 		#Ball Bounce logic
 		if(Vector3.BACK.dot(normal) > 0.1 || Vector3.FORWARD.dot(normal) > 0.1):
 			FlipDirectionZ()
