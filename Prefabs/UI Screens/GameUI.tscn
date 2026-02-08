@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://exm3fww0krde" path="res://Assets/Textures/Kenney UI/button_rectangle_border.png" id="4_jic1q"]
 [ext_resource type="Texture2D" uid="uid://be7khmiptftsk" path="res://Assets/Textures/Kenney UI/button_rectangle_depth_border.png" id="5_8u7ed"]
 
-[node name="Control" type="Control" unique_id=1712166761 node_paths=PackedStringArray("ChargeDisplay", "lifelabel", "levellabel")]
+[node name="Control" type="Control" unique_id=1042425638 node_paths=PackedStringArray("ChargeDisplay", "lifelabel", "levellabel")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -21,22 +21,23 @@ ChargeDisplay = NodePath("VBoxContainer/ProgressBar")
 lifelabel = NodePath("VBoxContainer/HBoxContainer/RichTextLabel2")
 levellabel = NodePath("VBoxContainer/HBoxContainer3/RichTextLabel2")
 
-[node name="PauseManager" type="Node" parent="." unique_id=1125756655 node_paths=PackedStringArray("pausecontainer", "targetButton")]
+[node name="PauseManager" type="Node" parent="." unique_id=824690264 node_paths=PackedStringArray("pausecontainer", "gameovercontainer", "targetButton")]
 process_mode = 3
 script = ExtResource("2_8u7ed")
-pausecontainer = NodePath("")
-targetButton = NodePath("")
+pausecontainer = NodePath("../CenterContainer/PauseContainer")
+gameovercontainer = NodePath("../CenterContainer/Game Over Container")
+targetButton = NodePath("../CenterContainer/PauseContainer/VBoxContainer/TextureButton")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=238472157]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1812942758]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 1
 offset_right = 150.0
 offset_bottom = 200.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1250126016]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1834130630]
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer" unique_id=139934671]
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer" unique_id=1761148258]
 clip_contents = false
 custom_minimum_size = Vector2(40, 25)
 layout_mode = 2
@@ -44,7 +45,7 @@ text = "💖:"
 scroll_active = false
 vertical_alignment = 1
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="VBoxContainer/HBoxContainer" unique_id=1532334368]
+[node name="RichTextLabel2" type="RichTextLabel" parent="VBoxContainer/HBoxContainer" unique_id=152473914]
 clip_contents = false
 custom_minimum_size = Vector2(80, 25)
 layout_mode = 2
@@ -52,7 +53,7 @@ text = "Health"
 scroll_active = false
 vertical_alignment = 1
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="VBoxContainer" unique_id=2045299465]
+[node name="RichTextLabel3" type="RichTextLabel" parent="VBoxContainer" unique_id=2123034944]
 clip_contents = false
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
@@ -60,7 +61,7 @@ text = "Charge Power"
 scroll_active = false
 vertical_alignment = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer" unique_id=1613728942]
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer" unique_id=1533613191]
 custom_minimum_size = Vector2(0, 23.29)
 layout_mode = 2
 min_value = 1.5
@@ -68,10 +69,10 @@ max_value = 3.0
 value = 1.5
 show_percentage = false
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer" unique_id=14472003]
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer" unique_id=1816906621]
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer3" unique_id=664040928]
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer3" unique_id=759509585]
 clip_contents = false
 custom_minimum_size = Vector2(40, 25)
 layout_mode = 2
@@ -79,7 +80,7 @@ text = "LVL:"
 scroll_active = false
 vertical_alignment = 1
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="VBoxContainer/HBoxContainer3" unique_id=628826734]
+[node name="RichTextLabel2" type="RichTextLabel" parent="VBoxContainer/HBoxContainer3" unique_id=1518286515]
 clip_contents = false
 custom_minimum_size = Vector2(80, 25)
 layout_mode = 2
@@ -87,7 +88,7 @@ text = "0"
 scroll_active = false
 vertical_alignment = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1469436940]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=355922299]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -95,7 +96,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PauseContainer" type="NinePatchRect" parent="CenterContainer" unique_id=293967062]
+[node name="PauseContainer" type="NinePatchRect" parent="CenterContainer" unique_id=1778804241]
+visible = false
 custom_minimum_size = Vector2(200, 256)
 layout_mode = 2
 texture = ExtResource("2_orawy")
@@ -104,7 +106,7 @@ patch_margin_top = 16
 patch_margin_right = 16
 patch_margin_bottom = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PauseContainer" unique_id=1130561718]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PauseContainer" unique_id=1694611475]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -119,7 +121,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 15
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="CenterContainer/PauseContainer/VBoxContainer" unique_id=2107326797]
+[node name="RichTextLabel2" type="RichTextLabel" parent="CenterContainer/PauseContainer/VBoxContainer" unique_id=168225724]
 layout_mode = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -131,11 +133,15 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureButton" type="TextureButton" parent="CenterContainer/PauseContainer/VBoxContainer" unique_id=1745621081]
+[node name="TextureButton" type="TextureButton" parent="CenterContainer/PauseContainer/VBoxContainer" unique_id=1175190590]
 custom_minimum_size = Vector2(150, 70)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_neighbor_top = NodePath("../TextureButton2")
+focus_neighbor_bottom = NodePath("../TextureButton2")
+focus_next = NodePath("../TextureButton2")
+focus_previous = NodePath("../TextureButton2")
 texture_normal = ExtResource("3_8ed3u")
 texture_pressed = ExtResource("4_jic1q")
 texture_hover = ExtResource("3_8ed3u")
@@ -144,7 +150,7 @@ texture_focused = ExtResource("3_8ed3u")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer/PauseContainer/VBoxContainer/TextureButton" unique_id=1358253976]
+[node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer/PauseContainer/VBoxContainer/TextureButton" unique_id=335050545]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -162,10 +168,14 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureButton2" type="TextureButton" parent="CenterContainer/PauseContainer/VBoxContainer" unique_id=1576205040]
+[node name="TextureButton2" type="TextureButton" parent="CenterContainer/PauseContainer/VBoxContainer" unique_id=1619630928]
 custom_minimum_size = Vector2(150, 70)
 layout_mode = 2
 size_flags_horizontal = 4
+focus_neighbor_top = NodePath("../TextureButton")
+focus_neighbor_bottom = NodePath("../TextureButton")
+focus_next = NodePath("../TextureButton")
+focus_previous = NodePath("../TextureButton")
 texture_normal = ExtResource("3_8ed3u")
 texture_pressed = ExtResource("4_jic1q")
 texture_hover = ExtResource("3_8ed3u")
@@ -174,7 +184,7 @@ texture_focused = ExtResource("3_8ed3u")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="CenterContainer/PauseContainer/VBoxContainer/TextureButton2" unique_id=1701060646]
+[node name="RichTextLabel2" type="RichTextLabel" parent="CenterContainer/PauseContainer/VBoxContainer/TextureButton2" unique_id=621506834]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -192,3 +202,144 @@ text = "Quit
 fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Game Over Container" type="NinePatchRect" parent="CenterContainer" unique_id=1297078324]
+visible = false
+custom_minimum_size = Vector2(200, 256)
+layout_mode = 2
+texture = ExtResource("2_orawy")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Game Over Container" unique_id=1363846757]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -109.0
+offset_right = 75.0
+offset_bottom = 109.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="CenterContainer/Game Over Container/VBoxContainer" unique_id=1827037997]
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/normal_font = ExtResource("3_jic1q")
+theme_override_font_sizes/normal_font_size = 25
+text = "Game Over!"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="CenterContainer/Game Over Container/VBoxContainer" unique_id=642402381]
+custom_minimum_size = Vector2(150, 70)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("3_8ed3u")
+texture_pressed = ExtResource("4_jic1q")
+texture_hover = ExtResource("3_8ed3u")
+texture_disabled = ExtResource("5_8u7ed")
+texture_focused = ExtResource("3_8ed3u")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer/Game Over Container/VBoxContainer/TextureButton" unique_id=689414221]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/normal_font = ExtResource("3_jic1q")
+theme_override_font_sizes/normal_font_size = 25
+text = "Retry"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WinContainer" type="NinePatchRect" parent="CenterContainer" unique_id=1799432654]
+visible = false
+custom_minimum_size = Vector2(200, 256)
+layout_mode = 2
+texture = ExtResource("2_orawy")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/WinContainer" unique_id=1759972731]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -109.0
+offset_right = 75.0
+offset_bottom = 109.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="CenterContainer/WinContainer/VBoxContainer" unique_id=946759372]
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/normal_font = ExtResource("3_jic1q")
+theme_override_font_sizes/normal_font_size = 25
+text = "You Win!"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="CenterContainer/WinContainer/VBoxContainer" unique_id=2122843620]
+custom_minimum_size = Vector2(150, 70)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("3_8ed3u")
+texture_pressed = ExtResource("4_jic1q")
+texture_hover = ExtResource("3_8ed3u")
+texture_disabled = ExtResource("5_8u7ed")
+texture_focused = ExtResource("3_8ed3u")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer/WinContainer/VBoxContainer/TextureButton" unique_id=1715783882]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/normal_font = ExtResource("3_jic1q")
+theme_override_font_sizes/normal_font_size = 25
+text = "Retry"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="CenterContainer/PauseContainer/VBoxContainer/TextureButton" to="PauseManager" method="_on_texture_button_pressed"]
+[connection signal="pressed" from="CenterContainer/PauseContainer/VBoxContainer/TextureButton2" to="PauseManager" method="_on_texture_button_3_pressed"]
+[connection signal="pressed" from="CenterContainer/Game Over Container/VBoxContainer/TextureButton" to="PauseManager" method="_on_texture_button_2_pressed"]
+[connection signal="pressed" from="CenterContainer/WinContainer/VBoxContainer/TextureButton" to="PauseManager" method="_on_texture_button_2_pressed"]

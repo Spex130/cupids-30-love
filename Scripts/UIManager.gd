@@ -18,3 +18,7 @@ func _process(delta):
 	levellabel.text = str(gameManager.level)
 	ChargeDisplay.value = lerp(ChargeDisplay.value, player.shotPower as float, .1)
 	pass
+
+
+func _on_texture_button_3_pressed() -> void:
+	pass # Replace with function body.

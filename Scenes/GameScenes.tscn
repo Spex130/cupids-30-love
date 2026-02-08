@@ -2,14 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://c7478fm4usabt" path="res://Prefabs/UI Screens/GameUI.tscn" id="1_fi85q"]
 [ext_resource type="PackedScene" uid="uid://dpsqau85hcxeg" path="res://Prefabs/PlayerChar.tscn" id="1_vxjsr"]
-[ext_resource type="Texture2D" uid="uid://04pw4xqndqqe" path="res://Assets/Textures/Kenney UI/button_square_line.png" id="2_63gqa"]
 [ext_resource type="PackedScene" uid="uid://d16d454f5kqn1" path="res://Prefabs/basic_arena.tscn" id="2_fjgpx"]
 [ext_resource type="Script" uid="uid://ba0prb3nbja8w" path="res://Scripts/GameManager.gd" id="2_j0hco"]
-[ext_resource type="FontFile" uid="uid://cvdpwhuliucoe" path="res://Assets/Fonts/Adorable.otf" id="3_7attl"]
-[ext_resource type="Texture2D" uid="uid://bivgp8lw2318g" path="res://Assets/Textures/Kenney UI/button_rectangle_depth_line.png" id="4_c8ttr"]
-[ext_resource type="Texture2D" uid="uid://exm3fww0krde" path="res://Assets/Textures/Kenney UI/button_rectangle_border.png" id="5_07fri"]
 [ext_resource type="Material" uid="uid://dmip057yhq4f7" path="res://VFX/Materials/WarningZone.tres" id="6_j0hco"]
-[ext_resource type="Texture2D" uid="uid://be7khmiptftsk" path="res://Assets/Textures/Kenney UI/button_rectangle_depth_border.png" id="6_vqei1"]
 
 [sub_resource type="Environment" id="Environment_dhhj6"]
 
@@ -25,97 +20,27 @@ size = Vector2(61, 3)
 gameManager = NodePath("../Game Manager")
 player = NodePath("../PlayerChar")
 
-[node name="PauseManager" parent="Control" index="0" unique_id=1125756655 node_paths=PackedStringArray("pausecontainer", "targetButton")]
-pausecontainer = NodePath("../CenterContainer/PauseContainer")
-targetButton = NodePath("../CenterContainer/PauseContainer/VBoxContainer/TextureButton")
+[node name="TextureButton" parent="Control/CenterContainer/PauseContainer/VBoxContainer" parent_id_path=PackedInt32Array(1712166761, 1694611475) index="1" unique_id=1175190590]
+focus_neighbor_top = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
 
-[node name="TextureButton" parent="Control/CenterContainer/PauseContainer/VBoxContainer" parent_id_path=PackedInt32Array(1712166761, 1130561718) index="1" unique_id=1745621081]
-focus_neighbor_top = NodePath("../TextureButton2")
-focus_neighbor_bottom = NodePath("../TextureButton2")
-focus_next = NodePath("../TextureButton2")
-focus_previous = NodePath("../TextureButton2")
-
-[node name="TextureButton2" parent="Control/CenterContainer/PauseContainer/VBoxContainer" parent_id_path=PackedInt32Array(1712166761, 1130561718) index="2" unique_id=1576205040]
-focus_neighbor_top = NodePath("../TextureButton")
-focus_neighbor_bottom = NodePath("../TextureButton")
-focus_next = NodePath("../TextureButton")
-focus_previous = NodePath("../TextureButton")
-
-[node name="Game Over Container" type="NinePatchRect" parent="Control/CenterContainer" parent_id_path=PackedInt32Array(1712166761, 1469436940) index="1" unique_id=1741301911]
-custom_minimum_size = Vector2(200, 256)
-layout_mode = 2
-texture = ExtResource("2_63gqa")
-patch_margin_left = 16
-patch_margin_top = 16
-patch_margin_right = 16
-patch_margin_bottom = 16
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer/Game Over Container" unique_id=487192872]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -75.0
-offset_top = -109.0
-offset_right = 75.0
-offset_bottom = 109.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 15
-
-[node name="RichTextLabel2" type="RichTextLabel" parent="Control/CenterContainer/Game Over Container/VBoxContainer" unique_id=760285357]
-layout_mode = 2
-theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 12
-theme_override_fonts/normal_font = ExtResource("3_7attl")
-theme_override_font_sizes/normal_font_size = 25
-text = "Game Over!"
-fit_content = true
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="TextureButton" type="TextureButton" parent="Control/CenterContainer/Game Over Container/VBoxContainer" unique_id=1066837318]
-custom_minimum_size = Vector2(150, 70)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture_normal = ExtResource("4_c8ttr")
-texture_pressed = ExtResource("5_07fri")
-texture_hover = ExtResource("4_c8ttr")
-texture_disabled = ExtResource("6_vqei1")
-texture_focused = ExtResource("4_c8ttr")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Control/CenterContainer/Game Over Container/VBoxContainer/TextureButton" unique_id=514516176]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 12
-theme_override_fonts/normal_font = ExtResource("3_7attl")
-theme_override_font_sizes/normal_font_size = 25
-text = "Retry"
-fit_content = true
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="TextureButton2" parent="Control/CenterContainer/PauseContainer/VBoxContainer" parent_id_path=PackedInt32Array(1712166761, 1694611475) index="2" unique_id=1619630928]
+focus_neighbor_top = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
 
 [node name="PlayerChar" parent="." unique_id=1597109566 node_paths=PackedStringArray("ParentArena") instance=ExtResource("1_vxjsr")]
 ParentArena = NodePath("../BasicArena")
 
-[node name="Game Manager" type="Node3D" parent="." unique_id=1713758058 node_paths=PackedStringArray("player", "GameArena", "GameOverZone")]
+[node name="Game Manager" type="Node3D" parent="." unique_id=1713758058 node_paths=PackedStringArray("player", "GameArena", "GameOverZone", "pauseManager")]
 script = ExtResource("2_j0hco")
 player = NodePath("../PlayerChar")
 GameArena = NodePath("../BasicArena")
 GameOverZone = NodePath("GameOverZone/Area3D")
+pauseManager = NodePath("../Control/PauseManager")
 
 [node name="Camera3D" type="Camera3D" parent="Game Manager" unique_id=2025713363]
 transform = Transform3D(1, 0, 0, 0, 0.34202015, 0.9396926, 0, -0.9396926, 0.34202015, 0, 126.84735, 25.91952)
@@ -150,8 +75,6 @@ transform = Transform3D(60, 0, 0, 0, 0.5, 0, 0, 0, 60, 0, -0.773, -8)
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 39.73079, 0)
 shadow_enabled = true
 
-[connection signal="pressed" from="Control/CenterContainer/PauseContainer/VBoxContainer/TextureButton" to="Control/PauseManager" method="_on_texture_button_pressed"]
-[connection signal="pressed" from="Control/CenterContainer/Game Over Container/VBoxContainer/TextureButton" to="Control/PauseManager" method="_on_texture_button_pressed"]
 [connection signal="body_shape_entered" from="Game Manager/GameOverZone/Area3D" to="Game Manager" method="_on_area_3d_body_shape_entered"]
 
 [editable path="Control"]

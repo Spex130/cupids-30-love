@@ -3,6 +3,7 @@ class_name GameManager extends Node3D
 @export var player : PlayerChar
 @export var GameArena : Arena
 @export var GameOverZone : Area3D
+@export var pauseManager: PauseManager
 @export var BrickBlocks : Dictionary = {} #Blocks that must be defeated to win
 @export var SpecialBrickBlocks : Array[BasicBlock] #Blocks that don't need to be defeated to win.
 @export var Enemies : Dictionary = {}
@@ -61,6 +62,8 @@ func _process(delta: float) -> void:
 		if(BrickBlocks.is_empty() && Enemies.is_empty()):
 			level+= 1
 			SpawnLevel(level)
+	if(level == 5):
+		pauseManager.win()
 	pass
 
 func CreateBlockRowAtRowIndex(row:int, horizontalMargin:float, count:int) ->void:
@@ -169,10 +172,12 @@ func _on_area_3d_body_shape_entered(body_rid, body, body_shape_index, local_shap
 	if(ball != null):
 		var ballCollider = ball.get_child(0) as CollisionShape3D
 		if(ballCollider!= null):
-			if(!ball.UseBounceCount): #If this is not a temp ball
+			if(ball.UseBounceCount == false): #If this is not a temp ball
 				lives -= 1
 				ball.Despawn()
-			if(lives > 0):
-				CreateStandardBall()
+				if(lives > 0):
+					CreateStandardBall()
+				else:
+					pauseManager.gameOver()
 			
 	pass
