@@ -26,7 +26,7 @@ focus_neighbor_bottom = NodePath("")
 focus_next = NodePath("")
 focus_previous = NodePath("")
 
-[node name="TextureButton2" parent="Control/CenterContainer/PauseContainer/VBoxContainer" parent_id_path=PackedInt32Array(1712166761, 1694611475) index="2" unique_id=1619630928]
+[node name="TextureButton2" parent="Control/CenterContainer/PauseContainer/VBoxContainer" parent_id_path=PackedInt32Array(1712166761, 1694611475) index="3" unique_id=1619630928]
 focus_neighbor_top = NodePath("")
 focus_neighbor_bottom = NodePath("")
 focus_next = NodePath("")

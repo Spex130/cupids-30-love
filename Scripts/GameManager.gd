@@ -51,7 +51,7 @@ func _ready() -> void:
 		tween.tween_callback(CreateStandardBall)
 	else:
 		CreateStandardBall()
-	SpawnLevel(1)
+	SpawnLevel(3)
 
 	pass # Replace with function body.
 
@@ -62,7 +62,7 @@ func _process(delta: float) -> void:
 		if(BrickBlocks.is_empty() && Enemies.is_empty()):
 			level+= 1
 			SpawnLevel(level)
-	if(level == 5):
+	if(level == 6):
 		pauseManager.win()
 	pass
 
@@ -122,6 +122,8 @@ func CreatePatrolEnemy(Position1:Vector3, Position2:Vector3, health:int, scale:f
 	heartbreaker.player = player
 	Enemies[heartbreaker] = heartbreaker
 	heartbreaker.position = Position1
+	heartbreaker.PatrolSpot1 = Position1
+	heartbreaker.PatrolSpot2 = Position2
 	heartbreaker.health = health
 	heartbreaker.scale *= scale
 	heartbreaker.enemyType = Heartbreaker.EnemyType.Patrol
@@ -141,14 +143,15 @@ func SpawnLevel(level:int):
 	tween = create_tween()
 	match(level):
 		0:
-			CreateSingleBlock(Vector3(0, 0, -30))
-		1:
-			#CreateBlockRowAtRowIndex(10, 1.125, 13)
-			#CreateBlockRowAtRowIndex(26, 1.125, 13)
 			CreateBlockRowAtRowIndex(48, 1.125, 13)
 			tween.tween_callback(CreateWaitEnemy.bind(Vector3(0, 0, -30), 2, 2))
-		2:
+		1:
 			#CreateBlockRowAtRowIndex(26, 1.125, 13)
+			CreateBlockRowAtRowIndex(48, 1.125, 13)
+			tween.tween_callback(CreateWaitEnemy.bind(Vector3(-20, 0, -30), 2, 2))
+			tween.tween_callback(CreateWaitEnemy.bind(Vector3(20, 0, -30), 2, 2))
+		2:
+			CreateBlockRowAtRowIndex(26, 1.125, 13)
 			CreateBlockRowAtRowIndex(48, 1.125, 13)
 			tween.tween_callback(CreateWaitEnemy.bind(Vector3(-20, 0, -30), 2, 2))
 			tween.tween_callback(CreateWaitEnemy.bind(Vector3(20, 0, -30), 2, 2))
@@ -158,10 +161,17 @@ func SpawnLevel(level:int):
 			tween.tween_callback(CreateWaitEnemy.bind(Vector3(-20, 0, -30), 2, 2))
 			tween.tween_callback(CreateWaitEnemy.bind(Vector3(20, 0, -30), 2, 2))
 		4:
-			CreateBlockRowAtRowIndex(26, 1.125, 13)
-			CreateBlockRowAtRowIndex(48, 1.125, 13)
-			tween.tween_callback(CreateWaitEnemy.bind(Vector3(-20, 0, -30), 2, 2))
-			tween.tween_callback(CreateWaitEnemy.bind(Vector3(20, 0, -30), 2, 2))
+			CreateBlockRowAtRowIndex(10, 1.125, 13)
+			tween.tween_callback(CreatePatrolEnemy.bind(Vector3(-20, 0, -40), Vector3(20, 0, -40), 1, 1))
+			CreateBlockRowAtRowIndex(45, 1.125, 13)
+			tween.tween_callback(CreatePatrolEnemy.bind(Vector3(20, 0, -20), Vector3(-20, 0, -20), 1, 1))
+			tween.tween_callback(CreateWaitEnemy.bind(Vector3(0, 0, -45), 2, 2))
+		5:
+			CreateBlockRowAtRowIndex(60, 1.125, 13)
+			CreateBlockRowAtRowIndex(54, 1.125, 13)
+			CreateBlockRowAtRowIndex(50, 1.125, 13)
+			CreateBlockRowAtRowIndex(46, 1.125, 13)
+			
 	TrackLevelCompletion = true
 	pass
 	
